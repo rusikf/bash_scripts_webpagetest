@@ -3,8 +3,8 @@
 set -e
 source ./credentials.sh
 
-echo 'Kill all docker containers'
-docker kill $(docker ps -q)
+echo 'Skip kill all docker containers'
+#docker kill $(docker ps -q)
 
 echo 'Run webpagetest location instance'
 docker run -d -p 4001:80 \
