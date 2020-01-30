@@ -21,4 +21,4 @@ ssh -t root@$SERVER_URL '(cd /home/deploy/bash_scripts_webpagetest && ./setup-do
 echo 'setup location under deploy user'
 ssh -t deploy@$SERVER_URL '(cd /home/deploy/bash_scripts_webpagetest && ./setup-location.sh)'
 
-echo 'Finish! Please change credentials.sh and run ./start-location.sh and add to cron for autorestart location'
+echo 'Finish! Please add/change credentials.sh from credentials-sample.sh and run ./start-location.sh and add optional: add to cron for autorestart location'
