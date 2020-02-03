@@ -1,6 +1,6 @@
 #/bin/bash
-set -e
-servers=() # ip addresses of servers
+
+servers=()
 
 for i in "${servers[@]}"
 do
