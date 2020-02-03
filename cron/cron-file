@@ -1,0 +1,3 @@
+MAILTO=ruslan@kodolabs.com
+0 7 * * * /home/deploy/bash_scripts_webpagetest/cron/restart.sh
+
