@@ -1,20 +1,24 @@
 #!/bin/bash
+
 set -e
+SERVER_URL=''
 
-# TODO: rewrite this script without mv and git clone in root
+echo 'add root ssh key'
+ssh-copy-id -i ~/.ssh/github_rsa.pub root@$SERVER_URL -o PreferredAuthentications=password -o PubkeyAuthentication=no
 
-echo 'Setup script - Run it under root'
+echo 'add deploy user'
+ssh -t root@$SERVER_URL 'adduser deploy;sudo groupadd docker;sudo usermod -aG docker deploy;'
 
-source add-user.sh
-source setup-docker.sh
+echo 'add deploy ssh key'
+ssh-copy-id -i ~/.ssh/github_rsa.pub deploy@$SERVER_URL -o PreferredAuthentications=password -o PubkeyAuthentication=no
 
-mv /root/bash_scripts_webpagetest /home/deploy/
+echo 'clone repo'
+ssh -t deploy@$SERVER_URL 'cd /home/deploy && git clone https://github.com/rusikf/bash_scripts_webpagetest'
 
-echo 'OK, next - add ssh key for deploy user'
-echo 'And on deploy user run setup-location.sh, start-location.sh from deploy user'
+echo 'setup docker under root'
+ssh -t root@$SERVER_URL '(cd /home/deploy/bash_scripts_webpagetest && ./setup-docker.sh)'
 
-echo 'Setup locaton script - Running under deploy user'
-su - deploy
-source setup-location.sh
-echo 'Finish: Add credentials to credentials.sh and run ./start-location.sh under deploy user'
+echo 'setup location under deploy user'
+ssh -t deploy@$SERVER_URL '(cd /home/deploy/bash_scripts_webpagetest && ./setup-location.sh)'
 
+echo 'Finish! Please add/change credentials.sh from credentials-sample.sh and run ./start-location.sh and add optional: add to cron for autorestart location'

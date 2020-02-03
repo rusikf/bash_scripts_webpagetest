@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+echo 'Run under root or user with sudo abilities'
 sudo apt-get install \
 	    apt-transport-https \
 	        ca-certificates \
@@ -16,6 +17,4 @@ sudo add-apt-repository \
 	         stable"
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-#sudo systemctl restart docker
 sudo systemctl start docker
-sudo docker run hello-world
