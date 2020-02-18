@@ -5,7 +5,7 @@ SERVER_URL=''
 WPT_SERVER=''
 WPT_UID=''
 
-#
+
 echo 'add root ssh key'
 ssh-copy-id -i ~/.ssh/github_rsa.pub root@$SERVER_URL -o PreferredAuthentications=password -o PubkeyAuthentication=no
 
@@ -35,4 +35,7 @@ ssh -t deploy@$SERVER_URL<< HERE
   ./start-location.sh
 HERE
 
-echo 'Finish!, Please add cron/restart.sh to cron under deploy user to prevent memory issues'
+echo 'Add restart wpt location to cron for prevent memory issues'
+ssh -t deploy@$SERVER_URL 'cd /home/deploy/bash_scripts_webpagetest/cron && ./update-cron.sh'
+
+echo 'Finish!, See docker ps OR docker stats in ssh'
