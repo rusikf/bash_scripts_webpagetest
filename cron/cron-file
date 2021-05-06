@@ -1,4 +1,4 @@
 MAILTO=ruslan@kodolabs.com
 0 2 * * * /home/deploy/bash_scripts_webpagetest/cron/restart.sh
-0 12 * * FRI /home/deploy/bash_scripts_webpagetest/cron/rebuild.sh
+0 6 * * FRI /home/deploy/bash_scripts_webpagetest/cron/rebuild.sh
 
