@@ -1,4 +1,5 @@
 set -e
+cd /home/deploy/bash_scripts_webpagetest
 echo 'Pull webpagetest agent location locked version'
 DIGEST="sha256:6cb22718d2c5824b5fa25268c4acb2d00d4bef0a1932cc63a014cb049ef35965"
 docker pull "webpagetest/agent@$DIGEST"
